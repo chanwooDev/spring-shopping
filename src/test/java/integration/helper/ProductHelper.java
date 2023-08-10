@@ -19,4 +19,17 @@ public class ProductHelper {
         return response;
     }
 
+    public static Long createProductAndGetId(ProductCreationRequest productCreationRequest) {
+        ExtractableResponse<Response> response = CommonRestAssuredUtils.post(
+            "/products",
+            productCreationRequest,
+            CommonRestAssuredUtils.LONG_EXPIRED_TOKEN
+        );
+        return response.jsonPath().get("id");
+    }
+
+    public static ProductCreationRequest createProductCreationRequest() {
+        return new ProductCreationRequest("피자", "10000", "imageUrl");
+    }
+
 }
